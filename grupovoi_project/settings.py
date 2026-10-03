@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-qrk8$o@9qu47j+7g_4-@6c-w_a7d@(ekpst0u)e-)c(_zlmld5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver", "0.0.0.0"]
 
 
 # Application definition
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'portal_grupi',
+    'portal_grupi.apps.PortalGrupiConfig',
 ]
 
 MIDDLEWARE = [

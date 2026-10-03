@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Головна</title>
+</head>
+<body>
+    <h1>Груповий проект</h1>
+
+    <p>Це простий сайт для групи. На цьому етапі тут є коротка інформація про проект і посилання на інші ресурси.</p>
+
+    <h2>Корисні посилання</h2>
+    <ul>
+        {% for item in links %}
+            <li><a href="{{ item.url }}" target="_blank" rel="noreferrer">{{ item.title }}</a></li>
+        {% empty %}
+            <li>Поки немає посилань.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Навігація</h2>
+    {% if user.is_authenticated %}
+        <p>Привіт, {{ user.username }}!</p>
+        <p>
+            <a href="{% url 'profile' %}">Профіль</a> |
+            <a href="{% url 'dashboard' %}">Ролі</a> |
+            <a href="{% url 'logout' %}">Вийти</a>
+        </p>
+    {% else %}
+        <p>
+            <a href="{% url 'register' %}">Реєстрація</a> |
+            <a href="{% url 'login' %}">Вхід</a>
+        </p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Профіль</title>
+</head>
+<body>
+    <h1>Профіль користувача</h1>
+
+    <p>Користувач: {{ user.username }}</p>
+    <p>Роль: {{ profile.get_role_display }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Зберегти</button>
+    </form>
+
+    <p><a href="{% url 'dashboard' %}">Перейти до ролей</a></p>
+    <p><a href="{% url 'home' %}">На головну</a></p>
+    <p><a href="{% url 'logout' %}">Вийти</a></p>
+</body>
+</html>
