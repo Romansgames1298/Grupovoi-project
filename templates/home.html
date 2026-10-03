@@ -10,14 +10,6 @@
     <p>Це простий сайт для групи. На цьому етапі тут є коротка інформація про проект і посилання на інші ресурси.</p>
 
     <h2>Корисні посилання</h2>
-    <ul>
-        {% for item in links %}
-            <li><a href="{{ item.url }}" target="_blank" rel="noreferrer">{{ item.title }}</a></li>
-        {% empty %}
-            <li>Поки немає посилань.</li>
-        {% endfor %}
-    </ul>
-
     <h2>Навігація</h2>
     {% if user.is_authenticated %}
         <p>Привіт, {{ user.username }}!</p>
