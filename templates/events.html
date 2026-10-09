@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="uk"><head><meta charset="UTF-8"><title>Події та календар</title></head><body>
+<h1>Події та календар подій</h1>
+{% if user.is_authenticated and user.profile.role == 'admin' or user.is_authenticated and user.profile.role == 'moderator' %}<p><a href="{% url 'event_create' %}">Додати подію</a></p>{% endif %}
+<h2>Календар на {{ month_name }}</h2>
+<table border="1" cellpadding="8"><tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Нд</th></tr>
+{% for week in calendar_rows %}<tr>{% for day in week %}<td valign="top" width="120">{% if day.number %}<b>{{ day.number }}</b><br>{% for event in day.events %}<small>{{ event.title }}<br>{{ event.date|date:"H:i" }}</small><br>{% endfor %}{% endif %}</td>{% endfor %}</tr>{% endfor %}</table>
+<h2>Список усіх подій</h2>
+{% for event in events %}<h3>{{ event.title }}</h3><p><b>Коли:</b> {{ event.date|date:"d.m.Y H:i" }}</p><p><b>Де:</b> {{ event.place|default:'Місце не вказано' }}</p><p>{{ event.description }}</p>{% if user.is_authenticated and user.profile.role == 'admin' or user.is_authenticated and user.profile.role == 'moderator' %}<a href="{% url 'event_edit' event.id %}">Редагувати</a> | <a href="{% url 'event_delete' event.id %}">Видалити</a>{% endif %}{% empty %}<p>Подій ще немає.</p>{% endfor %}
+<p><a href="{% url 'home' %}">На головну</a></p></body></html>

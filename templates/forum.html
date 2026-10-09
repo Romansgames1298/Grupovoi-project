@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html lang="uk"><head><meta charset="UTF-8"><title>Форум</title></head><body>
+<h1>Форум</h1>
+{% if user.is_authenticated and user.profile.role == 'admin' or user.is_authenticated and user.profile.role == 'moderator' %}<p><a href="{% url 'topic_create' %}">Створити тему</a></p>{% endif %}
+{% for topic in topics %}<h2><a href="{% url 'topic' topic.id %}">{{ topic.title }}</a></h2><p>{{ topic.description|truncatewords:20 }}</p><small>Автор: {{ topic.author.username }}, повідомлень: {{ topic.messages.count }}</small>{% empty %}<p>Тем ще немає.</p>{% endfor %}
+<p><a href="{% url 'home' %}">На головну</a></p></body></html>

@@ -18,3 +18,42 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} ({self.role})'
+
+
+class ForumTopic(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-updated_at']
+
+    def __str__(self):
+        return self.title
+
+
+class ForumMessage(models.Model):
+    topic = models.ForeignKey(ForumTopic, on_delete=models.CASCADE, related_name='messages')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    date = models.DateTimeField()
+    place = models.CharField(max_length=200, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['date']
+
+    def __str__(self):
+        return self.title

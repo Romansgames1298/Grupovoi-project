@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="uk"><head><meta charset="UTF-8"><title>{{ topic.title }}</title></head><body>
+<h1>{{ topic.title }}</h1><p>{{ topic.description }}</p>
+{% if user.profile.role == 'admin' or user.profile.role == 'moderator' %}<p><a href="{% url 'topic_edit' topic.id %}">Редагувати</a> | <a href="{% url 'topic_delete' topic.id %}">Видалити</a></p>{% endif %}
+<h2>Повідомлення</h2>{% for message in topic.messages.all %}<p><b>{{ message.author.username }}</b> ({{ message.created_at }}):<br>{{ message.text }}</p>{% empty %}<p>Повідомлень ще немає.</p>{% endfor %}
+<h2>Написати повідомлення</h2><form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Надіслати</button></form>
+<p><a href="{% url 'forum' %}">До форуму</a></p></body></html>

@@ -1,0 +1,1 @@
+<!DOCTYPE html><html lang="uk"><head><meta charset="UTF-8"><title>Підтвердження</title></head><body><h1>Видалення</h1><p>Ви точно хочете видалити {{ kind }} «{{ object }}»?</p><form method="post">{% csrf_token %}<button type="submit">Так, видалити</button></form><p><a href="{% url 'home' %}">Скасувати</a></p></body></html>
